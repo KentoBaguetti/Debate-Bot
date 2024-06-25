@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 const openai_1 = __importDefault(require("openai"));
 dotenv_1.default.config();
-class LMController {
+class LLMController {
     constructor() {
         this.openai = new openai_1.default();
         this.model = "gpt-3.5-turbo";
