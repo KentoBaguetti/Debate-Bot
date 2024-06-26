@@ -17,16 +17,14 @@ const LLMController_1 = __importDefault(require("./controllers/LLMController"));
 const router = express_1.default.Router();
 const debateBot = new LLMController_1.default();
 debateBot.start();
-router.post("/sendMessage", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/chat", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { userMessage } = req.body;
     try {
         if (!userMessage) {
             return res.status(400).json({ error: "Please send a string message" });
         }
         yield debateBot.addUserMessage(userMessage);
-        return res
-            .status(200)
-            .json({ message: "User message successfully sent" });
+        return res.status(200).json({ message: "User message successfully sent" });
     }
     catch (error) {
         if (error instanceof Error) {
@@ -37,7 +35,7 @@ router.post("/sendMessage", (req, res) => __awaiter(void 0, void 0, void 0, func
         return res.status(400).json({ error: "Unknown error happened" });
     }
 }));
-router.get("/getGPTResponse", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/chat", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield debateBot.gptResponse();
         return res.status(200).json({ response });
