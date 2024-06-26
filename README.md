@@ -1,6 +1,6 @@
 # Debate-Bot
 
-This bot is made with the OpenAI API and all it does will argue against you given a topic
+This bot is made with the OpenAI API whose sole purpose it to argue against you
 
 ### Current Build
 The current build only contains the backend. <br>
