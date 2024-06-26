@@ -1,19 +1,20 @@
-import dotenv from "dotenv";
 import OpenAI from "openai";
-dotenv.config();
+import type { ChatCompletionMessageParam } from "openai/resources";
 
 class LLMController {
 	openai: OpenAI;
 	model: string;
 	OPENAI_API_KEY: string | undefined;
-	systemPrompt: object;
-	messages: object[];
+	systemPrompt: ChatCompletionMessageParam;
+	messages: ChatCompletionMessageParam[];
 
 	constructor() {
-		this.openai = new OpenAI();
-		this.model = "gpt-3.5-turbo";
 		this.OPENAI_API_KEY =
 			process.env.OPENAI_KEY || "ezewr12NotAnApiKeyForYou12Haha123";
+		this.openai = new OpenAI({
+			apiKey: this.OPENAI_API_KEY,
+		});
+		this.model = "gpt-3.5-turbo";
 		this.systemPrompt = {
 			role: "system",
 			content:
@@ -22,13 +23,51 @@ class LLMController {
 		this.messages = [];
 	}
 
-	start() {
+	start(): void {
 		this.initiateArgument();
 	}
 
-	initiateArgument() {
+	initiateArgument(): void {
 		this.messages.push(this.systemPrompt);
 	}
 
-	async addUserMessage(userInput: string) {}
+	async addUserMessage(userInput: string): Promise<void> {
+		const inputData: ChatCompletionMessageParam = {
+			role: "user",
+			content: userInput,
+		};
+		this.messages.push(inputData);
+	}
+
+	async gptResponse(): Promise<string | null | undefined> {
+		try {
+			const response = await this.openai.chat.completions.create({
+				model: this.model,
+				messages: this.messages,
+				max_tokens: 100,
+				temperature: 0.7,
+				frequency_penalty: 0.5,
+				presence_penalty: 0.0,
+			});
+
+			const assistantResponse: ChatCompletionMessageParam =
+				response.choices[0].message;
+
+			console.log(assistantResponse);
+
+			this.messages.push(assistantResponse);
+
+			const stringResponse: string | null | undefined =
+				assistantResponse.content;
+
+			return stringResponse;
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error("Error sending message to GPT");
+				return "Error recieving response from GPT";
+			}
+		}
+	}
 }
+
+export default LLMController;
