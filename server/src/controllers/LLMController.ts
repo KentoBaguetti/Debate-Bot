@@ -1,6 +1,8 @@
 import OpenAI from "openai";
 import type { ChatCompletionMessageParam } from "openai/resources";
 
+// TODO: Consider adding a parameter that takes an open-ai key so users can use their own api key on the live build
+
 class LLMController {
 	openai: OpenAI;
 	model: string;
