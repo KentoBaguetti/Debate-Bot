@@ -48,6 +48,8 @@ const ChatPage: React.FC = () => {
 		}
 	};
 
+	useEffect(() => {}, []);
+
 	return (
 		<div className="chatPage">
 			<h1>DebateBot</h1>
