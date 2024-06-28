@@ -1,0 +1,22 @@
+.debateBotResponse .image-container {
+	position: relative;
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.debateBotResponse .background-image {
+    max-width: 800px;
+    max-height: 450px;
+	display: block;
+}
+
+.debateBotResponse .response-text {
+	position: absolute;
+	top: 20%; /* Adjust this value to position the text */
+	left: 10%; /* Adjust this value to position the text */
+	width: 80%; /* Adjust this value for the width of the text area */
+	background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+	padding: 10px;
+	border-radius: 5px;
+}
