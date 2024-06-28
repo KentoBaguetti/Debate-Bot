@@ -1,11 +1,21 @@
-const DebateBotResponse = (props: { gptResponse: string }) => {
-	const gptMessage = props.gptResponse;
+import type React from "react";
+import Typewriter from "typewriter-effect";
 
+interface DebateBotResponseProps {
+	gptResponse: string;
+}
+
+const DebateBotResponse: React.FC<DebateBotResponseProps> = ({
+	gptResponse,
+}) => {
 	return (
-		<div className="BotResponse">
-			<div className="message">
-				<p>{gptMessage}</p>
-			</div>
+		<div className="debateBotResponse">
+			<Typewriter
+				key={gptResponse}
+				onInit={(typewriter) => {
+					typewriter.changeDelay(20).typeString(gptResponse).start();
+				}}
+			/>
 		</div>
 	);
 };

@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const openai_1 = __importDefault(require("openai"));
 // TODO: Consider adding a parameter that takes an open-ai key so users can use their own api key on the live build
+// TODO: Change parameters for gpt to use more tokens and be more concise?
 class LLMController {
     constructor(gptPrompt, model) {
         this.OPENAI_API_KEY = process.env.OPENAI_KEY;
